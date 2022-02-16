@@ -1,0 +1,169 @@
+
+<!-- icons  -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+<!-- <div id="before-login-header"class="row" style="background-color: #ffffff;margin-left: 0.1px;margin-right: 0.5px;margin-bottom: 5px;">
+    <nav class="navbar navbar-expand-lg navbar-light ml-3">
+      <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+        <ul class="nav-item">
+          <img height="70px" width="140px" src="assets/images/bank-logo.png" />
+        </ul>
+        &nbsp;
+        
+  
+      </div>
+      <a routerLink="register" >
+        <button  type="submit" class="btn" 
+        style="color: #ffffff;font-family:Verdana, Geneva, Tahoma, sans-serif ;
+        font-weight: bold;background-color: #000000;" ngClick >Log In</button>
+      </a>
+  
+    </nav>
+  
+</div> -->
+<div class="row">
+  <div class="col-7">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <!-- ngfor loop using get dynamic value and ngclass for add acive class -->
+        <div class="carousel-item" *ngFor="let result of data; let i = index" [ngClass]="{'active': i === 1}">
+          <img style="height: 440px; width: 1700px;" src={{result.img}} title={{result.title}} />
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <div class="col-5" >
+    <div class=" flex-r container" style="background-color:#ccc;">
+      <div class="flex-r login-wrapper">
+        <div class="login-text">
+            <div style="display: flex;justify-content: center;">
+              <img height="65px" width="110px" src="assets/images/bank-logo.png" />
+          </div>
+          <form [formGroup]= "user" (ngSubmit) ="register()" class="flex-c" >
+            <div class="input-box">
+              <span class="label">First Name</span>
+              <div class=" flex-r input">
+                <input type="text" formControlName="firstName" placeholder="Enter your first name">
+                <i class="fas fa-at"></i>
+              </div>
+              <div class = "alert alert-danger" [hidden]="user.controls['firstName'].valid || user.controls['firstName'].pristine" >
+                  Enter a valid first name
+              </div>
+            </div>
+
+            <div class="input-box">
+              <span class="label">Last Name</span>
+              <div class=" flex-r input">
+                <input type="text" formControlName="lastName" placeholder="Enter your last name">
+                <i class="fas fa-at"></i>
+              </div>
+              <div class = "alert alert-danger" [hidden]="user.controls['lastName'].valid || user.controls['lastName'].pristine" >
+                  Enter a valid last name
+              </div>
+            </div>
+            
+            <div class="input-box">
+              <span class="label">Date of Birth</span>
+              <div class=" flex-r input">
+                <input type="date" formControlName="dob" placeholder="Enter your DOB">
+                <i class="fas fa-at"></i>
+              </div>
+              <div class = "alert alert-danger" [hidden]="user.controls['dob'].valid || user.controls['dob'].pristine" >
+                  Enter a valid DOB
+              </div>
+            </div>
+
+            <div class="input-box">
+              <span class="label">Address</span>
+              <div class="flex-r input">
+                <input type="text" formControlName="address"  placeholder="Enter your address" >
+                <i class="fas fa-lock"></i>
+              </div>
+              <div class = "alert alert-danger" [hidden]="user.controls['address'].valid || user.controls['address'].pristine" >
+                  Enter a valid residential address
+              </div>
+            </div>
+
+            <div class="input-box">
+              <span class="label">Contact No.</span>
+              <div class="flex-r input">
+                <input type="number" formControlName="contactNo"  placeholder="Enter your contact No." >
+                <i class="fas fa-lock"></i>
+              </div>
+              <div class = "alert alert-danger" [hidden]="user.controls['contactNo'].valid || user.controls['contactNo'].pristine" >
+                  Enter a valid mobile no.
+              </div>
+            </div>
+
+            <div class="input-box">
+              <span class="label">Email</span>
+              <div class="flex-r input">
+                <input type="email" formControlName="email"  placeholder="Enter your email ID" >
+                <i class="fas fa-lock"></i>
+              </div>
+              <div class = "alert alert-danger" [hidden]="user.controls['email'].valid || user.controls['email'].pristine" >
+                  Enter a valid email ID
+              </div>
+            </div>
+
+            <div class="input-box">
+              <span class="label">Password</span>
+              <div class="flex-r input">
+                <input type="password" formControlName="password"  placeholder="Enter your login passsword" >
+                <i class="fas fa-lock"></i>
+              </div>
+              <div class = "alert alert-danger" [hidden]="user.controls['password'].valid || user.controls['password'].pristine" >
+                  Enter a valid password
+              </div>
+            </div>
+
+            <div class="input-box">
+              <span class="label">Confirm Password</span>
+              <div class="flex-r input">
+                <input type="password" formControlName="confirmPassword"  placeholder="Re-enter your login passsword" >
+                <i class="fas fa-lock"></i>
+              </div>
+              <div class = "alert alert-danger" [hidden]="user.controls['password'].valid || user.controls['password'].pristine" >
+                  Re-enter a valid password
+              </div>
+            </div>
+
+            <div *ngIf ="err" class ="text-danger">
+              {{err.error.message}}
+          </div>
+            <!-- <div  class="button-left"style="display:flex;margin:20px">
+              <input class="btn" style="padding-left:25px;padding-right:25px" [disabled] = "user.invalid" type="submit" value="Register">
+            </div>
+
+          <div  class="button-right"style="display:flex;margin:40px">
+            <input class="btn"  [disabled] = "user.invalid" type="submit" value="Log In">
+        </div> -->
+
+        <!-- <div class="bs-example">
+          <div class="container"> -->
+              <div class="row">
+                  <div class="cancel col-md-6 bg-light text-left" style="margin-left:20px">
+                      <button type="button" class="btn btn-primary">Cancel</button>
+                  </div>
+                  <div class="save col-md-6 bg-light text-right" style="margin-left:30px">
+                    <button type="button" class="btn btn-warning mr-2">Save</button>
+                </div>
+              </div>
+          <!-- </div>
+      </div> -->
+        <!-- style="padding-left:25px;padding-right:25px" -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
